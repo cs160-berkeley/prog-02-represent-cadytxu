@@ -19,12 +19,12 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent repDetail = getIntent();
         Bundle extras = repDetail.getExtras();
-        String repId = extras.getString("personId");
-        int img = Integer.parseInt(extras.getString("personPhoto"));
+        String repName = extras.getString("repName");
+        int img = Integer.parseInt(extras.getString("repImage"));
         ImageView photo = (ImageView) findViewById(R.id.photo);
         photo.setImageResource(img);
         TextView detailName = (TextView)findViewById(R.id.detailName);
-        detailName.append(" " + repId);
+        detailName.setText(repName);
     }
 
 }

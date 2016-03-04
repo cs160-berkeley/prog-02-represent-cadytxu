@@ -1,9 +1,11 @@
 package com.cs160.cadyxu.respublica;
 
+import java.io.Serializable;
+
 /**
  * Created by cadyxu on 2/28/16.
  */
-public class RepSum {
+public class RepSum implements Serializable {
     private int id;
     private int image;
     private String name;

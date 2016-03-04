@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/websiteText"
             tools:text="www.bsanders.com"
-            android:textSize="16dp"
+            android:textSize="12dp"
             android:paddingLeft="10dp"
             android:textColor="#000000"/>
         <TextView
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/emailText"
             tools:text="berniesanders@berkeley.edu"
-            android:textSize="16dp"
+            android:textSize="12dp"
             android:paddingLeft="10dp"
             android:textColor="#000000"/>
         <TextView
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tweetText"
             tools:text="Let's get rid of wall street!!!"
-            android:textSize="16dp"
+            android:textSize="12dp"
             android:paddingLeft="10dp"
             android:textColor="#000000"/>
     </LinearLayout>

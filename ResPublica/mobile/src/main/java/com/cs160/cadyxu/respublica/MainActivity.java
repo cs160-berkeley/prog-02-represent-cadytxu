@@ -11,14 +11,132 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    EditText zipText;
+    private EditText zipText;
+    private Button zipSubmitButton;
+    private Button curLocSubmitButton;
+    private String zipString;
+    private TextView errorText;
+    private int zipInt;
+    private boolean zipValid = false;
+    protected static ArrayList<RepSum> mRepList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        zipSubmitButton = (Button) findViewById(R.id.zipButton);
+        curLocSubmitButton = (Button) findViewById(R.id.curLocButton);
+
+        zipSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                zipText = (EditText)findViewById(R.id.zipEditText);
+                zipString = zipText.getText().toString();
+                errorText = (TextView)findViewById(R.id.errorTextView);
+                if (zipString == ""){
+                    errorText.setText("Your zip code is empty.");
+                } else {
+                    try {
+                        zipInt = Integer.parseInt(zipText.getText().toString());
+                        if (zipInt >= 10000){
+                            zipValid = true;
+                        }else{
+                            errorText.setText("Your zip code should be 5-digit Long.");
+                        }
+                    }catch (NumberFormatException nfe){
+                        errorText.setText("Your zip code is not a number.");
+                    }
+
+                }
+                if (zipValid){
+                    errorText.setText("Your zip code is correct.");
+
+                    mRepList = new ArrayList<RepSum>();
+                    mRepList.add(new RepSum(1,
+                            R.drawable.dianne_feinstein,
+                            "Sen. Dianne Feinstein",
+                            "senator@feinstein.senate.gov",
+                            "Vote for Dianne Feinstein!!!",
+                            "Democrat","Senator",
+                            "http://www.feinstein.senate.gov"));
+                    mRepList.add(new RepSum(2,
+                            R.drawable.barbara_lee,
+                            "Rep. Barbara Lee",
+                            "barbaralee@gmail.com",
+                            "Vote for Barbara Lee!!!",
+                            "Democrat",
+                            "Representative",
+                            "http://www.barbaralee.com"));
+                    mRepList.add(new RepSum(3,
+                            R.drawable.barbara_boxer,
+                            "Sen. Barbara Boxer",
+                            "barbaraboxer@gmail.com",
+                            "Vote For Barbara Boxer!!!",
+                            "Democrat",
+                            "Senator",
+                            "http://www.boxer.senate.gov"));
+
+                    Intent toPhoneIntent = new Intent(getBaseContext(), SummaryActivity.class);
+                    Bundle bundleRepList = new Bundle();
+                    bundleRepList.putSerializable("repList", mRepList);
+                    toPhoneIntent.putExtras(bundleRepList);
+                    startActivity(toPhoneIntent);
+
+                    Intent toWatchIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
+                    toWatchIntent.putExtras(bundleRepList);
+                    startService(toWatchIntent);
+                }
+
+            }
+        });
+
+        curLocSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int curLocZip = 94704;
+                mRepList = new ArrayList<RepSum>();
+                mRepList.add(new RepSum(1,
+                        R.drawable.dianne_feinstein,
+                        "Sen. Dianne Feinstein",
+                        "senator@feinstein.senate.gov",
+                        "Vote for Dianne Feinstein!!!",
+                        "Democrat","Senator",
+                        "http://www.feinstein.senate.gov"));
+                mRepList.add(new RepSum(2,
+                        R.drawable.barbara_lee,
+                        "Rep. Barbara Lee",
+                        "barbaralee@gmail.com",
+                        "Vote for Barbara Lee!!!",
+                        "Democrat",
+                        "Representative",
+                        "http://www.barbaralee.com"));
+                mRepList.add(new RepSum(3,
+                        R.drawable.barbara_boxer,
+                        "Sen. Barbara Boxer",
+                        "barbaraboxer@gmail.com",
+                        "Vote For Barbara Boxer!!!",
+                        "Democrat",
+                        "Senator",
+                        "http://www.boxer.senate.gov"));
+
+                Intent toPhoneIntent = new Intent(getBaseContext(), SummaryActivity.class);
+                Bundle bundleRepList = new Bundle();
+                bundleRepList.putSerializable("repList", mRepList);
+                toPhoneIntent.putExtras(bundleRepList);
+                startActivity(toPhoneIntent);
+
+                Intent toWatchIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
+                //toWatchIntent.putExtras(bundleRepList);
+                startService(toWatchIntent);
+            }
+        });
     }
 
     @Override
@@ -30,14 +148,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void zipOnClick(View v){
-        zipText = (EditText)findViewById(R.id.zipEditText);
-
-        //Button button = (Button) v;
-        //button.setOnClickListener(new onClickListener());
-
-        Intent intent = new Intent(this, SummaryActivity.class);
-        intent.putExtra("zipText", Integer.parseInt(zipText.getText().toString()));
-        startActivity(intent);
+        Button button = (Button) v;
+        button.setText("Clicked");
 
     }
 

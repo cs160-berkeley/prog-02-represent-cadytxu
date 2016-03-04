@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="#ffffff">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/repImage"
+        android:src="#d8acac" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:id="@+id/repNameText"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#313030"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Party"
+        android:id="@+id/repPartyText"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#313030"
+        android:textAlignment="center"
+        android:layout_marginTop="1dp" />
+
+</LinearLayout>

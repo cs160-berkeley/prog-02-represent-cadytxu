@@ -22,7 +22,8 @@
         android:layout_marginTop="173dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:typeface="serif" />
+        android:typeface="serif"
+        android:id="@+id/textView2" />
 
     <Button
         android:layout_width="wrap_content"
@@ -60,5 +61,15 @@
         android:layout_alignStart="@+id/zipEditText"
         android:layout_alignEnd="@+id/zipEditText"
         android:onClick="zipOnClick" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/errorTextView"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/curLocButton"
+        android:layout_centerHorizontal="true"
+        android:singleLine="true"
+        android:textSize="15sp" />
 
 </RelativeLayout>
