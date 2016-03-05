@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 public class PhoneListenerService extends WearableListenerService {
     //   WearableListenerServices don't need an iBinder or an onStartCommand: they just need an onMessageReceieved.
     private static final String NAME = "/send_name";
-    private static final String IMAGE = "/send_image";
+   // private static final String IMAGE = "/send_image";
     private String repName, repImage;
 
     @Override
@@ -39,9 +39,11 @@ public class PhoneListenerService extends WearableListenerService {
             extras.putString("repName", repName);
             extras.putString("repImage", Integer.toString(R.drawable.dianne_feinstein));
             detail.putExtras(extras);
-            startActivity(detail);
-            //intent.putExtras();
+
             detail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            startActivity(detail);
+
             //you need to add this flag since you're starting a new activity from a service
 
             Log.d("T", "about to start watch MainActivity with REP_NAME: Dianne Feinstein");

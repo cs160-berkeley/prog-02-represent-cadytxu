@@ -34,29 +34,33 @@ public class MainActivity extends AppCompatActivity {
         zipSubmitButton = (Button) findViewById(R.id.zipButton);
         curLocSubmitButton = (Button) findViewById(R.id.curLocButton);
 
+
         zipSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 zipText = (EditText)findViewById(R.id.zipEditText);
                 zipString = zipText.getText().toString();
                 errorText = (TextView)findViewById(R.id.errorTextView);
-                if (zipString == ""){
-                    errorText.setText("Your zip code is empty.");
-                } else {
-                    try {
-                        zipInt = Integer.parseInt(zipText.getText().toString());
-                        if (zipInt >= 10000){
-                            zipValid = true;
-                        }else{
-                            errorText.setText("Your zip code should be 5-digit Long.");
-                        }
-                    }catch (NumberFormatException nfe){
-                        errorText.setText("Your zip code is not a number.");
+
+                try {
+                    zipInt = Integer.parseInt(zipText.getText().toString());
+                    if (zipInt >= 10000){
+                        zipValid = true;
+                    }else{
+                        errorText.setText("Your zip code should be 5-digit Long.");
+                    }
+                }catch (NumberFormatException nfe){
+                    errorText.setText("Your zip code is not a number.");
+                }
+
+
+                if (zipValid){
+                    if (zipString.equals("94704")) {
+                        errorText.setText("True, your zipcode is 94704.");
+                    } else {
+                        errorText.setText("Your zipcode is correct.");
                     }
 
-                }
-                if (zipValid){
-                    errorText.setText("Your zip code is correct.");
 
                     mRepList = new ArrayList<RepSum>();
                     mRepList.add(new RepSum(1,
@@ -90,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(toPhoneIntent);
 
                     Intent toWatchIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
-                    toWatchIntent.putExtras(bundleRepList);
+                    toWatchIntent.putExtra("zipCode", zipString);
                     startService(toWatchIntent);
                 }
 
@@ -100,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         curLocSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int curLocZip = 94704;
+                zipString = "94704";
                 mRepList = new ArrayList<RepSum>();
                 mRepList.add(new RepSum(1,
                         R.drawable.dianne_feinstein,
@@ -133,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(toPhoneIntent);
 
                 Intent toWatchIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
-                //toWatchIntent.putExtras(bundleRepList);
+                toWatchIntent.putExtra("zipCode", zipString);
                 startService(toWatchIntent);
             }
         });

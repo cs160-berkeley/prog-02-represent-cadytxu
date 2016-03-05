@@ -12,6 +12,7 @@ public class MainActivity extends Activity {
 
     private Button mViewRepBtn;
     private Button mViewTurnoutBtn;
+    private String zipString;
     //private String mVotes = "78.9%";
     //private String mOppoVotes = "18.2%";
 
@@ -22,16 +23,15 @@ public class MainActivity extends Activity {
 
         mViewRepBtn = (Button) findViewById(R.id.viewMyRepsButton);
         mViewTurnoutBtn = (Button) findViewById(R.id.viewTurnout);
-
-        //Intent intent = getIntent();
-        //final Bundle extras = intent.getExtras();
-
+        Intent intent = getIntent();
+        zipString = intent.getStringExtra("zipString");
+        //mViewTurnoutBtn.setText(zipString);
 
         mViewRepBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent sendIntent = new Intent(getBaseContext(), SummaryActivity.class);
-                //sendIntent.putExtras(extras);
+                sendIntent.putExtra("zipString", zipString);
                 startActivity(sendIntent);
             }
         });
@@ -40,8 +40,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent sendIntent = new Intent(getBaseContext(), TurnoutActivity.class);
-                //sendIntent.putExtra("myVotes", mVotes);
-                //sendIntent.putExtra("myOpponentVotes", mOppoVotes);
+                sendIntent.putExtra("zipString", zipString);
                 startActivity(sendIntent);
             }
         });

@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
@@ -49,9 +50,13 @@ public class PhoneToWatchService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Which cat do we want to feed? Grab this info from INTENT
         // which was passed over when we called startService
-        Bundle extras = intent.getExtras();
-        //final String catName = extras.getString("CAT_NAME");
-        final ArrayList<RepSum> mRepList = (ArrayList<RepSum>)extras.getSerializable("repList");
+        Log.d("T", "Phone to Watch: start communication");
+        final String zipString;
+        if (intent != null){
+            zipString = intent.getStringExtra("zipCode");
+        } else {
+            zipString = "";
+        }
 
         // Send the message with the cat name
         new Thread(new Runnable() {
@@ -59,8 +64,9 @@ public class PhoneToWatchService extends Service {
             public void run() {
                 //first, connect to the apiclient
                 mApiClient.connect();
+                Log.d("T", "Phone to Watch: about to send message");
                 //now that you're connected, send a massage with the cat name
-                sendMessage("/viewmyreps", "view my reps");
+                sendMessage("/viewmyreps", zipString);
             }
         }).start();
 
@@ -82,6 +88,7 @@ public class PhoneToWatchService extends Service {
                 for(Node node : nodes.getNodes()) {
                     //we find 'nodes', which are nearby bluetooth devices (aka emulators)
                     //send a message for each of these nodes (just one, for an emulator)
+                    Log.d("T", "Phone to Watch: found nodes");
                     MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
                             mApiClient, node.getId(), path, text.getBytes() ).await();
                     //4 arguments: api client, the node ID, the path (for the listener to parse),

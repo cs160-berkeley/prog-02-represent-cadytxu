@@ -22,7 +22,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View 2012 Turnout!"
+        android:text="View 2012 Result!"
         android:id="@+id/viewTurnout"
         android:layout_gravity="center_horizontal" />
 

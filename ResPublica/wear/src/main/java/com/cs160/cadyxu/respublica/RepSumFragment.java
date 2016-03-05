@@ -52,6 +52,7 @@ public class RepSumFragment extends CardFragment {
             @Override
             public void onClick(View v) {
 
+                nameText.setText("You just clicked me!");
                 Intent detail = new Intent(getActivity().getBaseContext(), WatchToPhoneService.class);
                 Bundle extras = new Bundle();
                 extras.putString("repName", getArguments().getString("name"));
