@@ -20,12 +20,65 @@ public class SummaryActivity extends AppCompatActivity {
     private ListView lvRep;
     private RepSumAdapter adapter;
     protected static ArrayList<RepSum> mRepList;
+    private String zipString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
-        Bundle bundleRepList = getIntent().getExtras();
-        mRepList = (ArrayList<RepSum>)bundleRepList.getSerializable("repList");
+
+        zipString = getIntent().getStringExtra("zipCode");
+        mRepList = new ArrayList<RepSum>();
+        if (zipString!=null && zipString.equals("94704")){
+            mRepList.add(new RepSum(1,
+                    R.drawable.dianne_feinstein,
+                    "Sen. Dianne Feinstein",
+                    "senator@feinstein.senate.gov",
+                    "Vote for Dianne Feinstein!!!",
+                    "Democrat", "Senator",
+                    "http://www.feinstein.senate.gov"));
+            mRepList.add(new RepSum(2,
+                    R.drawable.barbara_lee,
+                    "Rep. Barbara Lee",
+                    "barbaralee@gmail.com",
+                    "Vote for Barbara Lee!!!",
+                    "Democrat",
+                    "Representative",
+                    "http://www.barbaralee.com"));
+            mRepList.add(new RepSum(3,
+                    R.drawable.barbara_boxer,
+                    "Sen. Barbara Boxer",
+                    "barbaraboxer@gmail.com",
+                    "Vote For Barbara Boxer!!!",
+                    "Democrat",
+                    "Senator",
+                    "http://www.boxer.senate.gov"));
+        } else {
+            mRepList.add(new RepSum(1,
+                    R.drawable.barbara_boxer,
+                    "Sen. Barbara Boxer",
+                    "barbaraboxer@gmail.com",
+                    "Vote For Barbara Boxer!!!",
+                    "Democrat",
+                    "Senator",
+                    "http://www.boxer.senate.gov"));
+            mRepList.add(new RepSum(2,
+                    R.drawable.dianne_feinstein,
+                    "Sen. Dianne Feinstein",
+                    "senator@feinstein.senate.gov",
+                    "Vote for Dianne Feinstein!!!",
+                    "Democrat", "Senator",
+                    "http://www.feinstein.senate.gov"));
+            mRepList.add(new RepSum(3,
+                    R.drawable.barbara_lee,
+                    "Rep. Barbara Lee",
+                    "barbaralee@gmail.com",
+                    "Vote for Barbara Lee!!!",
+                    "Democrat",
+                    "Representative",
+                    "http://www.barbaralee.com"));
+        }
+
+
         /*Toast.makeText(this, zipCode, Toast.LENGTH_LONG).show();
         Notification notification = new Notification.Builder(this)
                 .setContentTitle(zipCode)
@@ -53,11 +106,5 @@ public class SummaryActivity extends AppCompatActivity {
             }
         });
     }
-    /*
-    public void onDetailed(View v) {
-        Intent detail = new Intent(this, DetailedView.class);
-        detail.putExtra("personId", v.getTag().toString());
-        startActivity(detail);
-    }
-    */
+
 }

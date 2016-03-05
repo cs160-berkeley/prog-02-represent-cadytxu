@@ -88,9 +88,7 @@ public class MainActivity extends AppCompatActivity {
                             "http://www.boxer.senate.gov"));
 
                     Intent toPhoneIntent = new Intent(getBaseContext(), SummaryActivity.class);
-                    Bundle bundleRepList = new Bundle();
-                    bundleRepList.putSerializable("repList", mRepList);
-                    toPhoneIntent.putExtras(bundleRepList);
+                    toPhoneIntent.putExtra("zipCode", zipString);
                     startActivity(toPhoneIntent);
 
                     Intent toWatchIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
@@ -105,35 +103,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 zipString = "94704";
-                mRepList = new ArrayList<RepSum>();
-                mRepList.add(new RepSum(1,
-                        R.drawable.dianne_feinstein,
-                        "Sen. Dianne Feinstein",
-                        "senator@feinstein.senate.gov",
-                        "Vote for Dianne Feinstein!!!",
-                        "Democrat","Senator",
-                        "http://www.feinstein.senate.gov"));
-                mRepList.add(new RepSum(2,
-                        R.drawable.barbara_lee,
-                        "Rep. Barbara Lee",
-                        "barbaralee@gmail.com",
-                        "Vote for Barbara Lee!!!",
-                        "Democrat",
-                        "Representative",
-                        "http://www.barbaralee.com"));
-                mRepList.add(new RepSum(3,
-                        R.drawable.barbara_boxer,
-                        "Sen. Barbara Boxer",
-                        "barbaraboxer@gmail.com",
-                        "Vote For Barbara Boxer!!!",
-                        "Democrat",
-                        "Senator",
-                        "http://www.boxer.senate.gov"));
 
                 Intent toPhoneIntent = new Intent(getBaseContext(), SummaryActivity.class);
-                Bundle bundleRepList = new Bundle();
-                bundleRepList.putSerializable("repList", mRepList);
-                toPhoneIntent.putExtras(bundleRepList);
+                toPhoneIntent.putExtra("zipCode", zipString);
                 startActivity(toPhoneIntent);
 
                 Intent toWatchIntent = new Intent(getBaseContext(), PhoneToWatchService.class);

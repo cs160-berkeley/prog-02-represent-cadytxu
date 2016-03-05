@@ -56,7 +56,6 @@ public class WatchToPhoneService extends Service {
         Log.d("T", "Watch to Phone Start Communication");
         Bundle extras = intent.getExtras();
         final String repName = extras.getString("repName");
-        final String repImage = extras.getString("repImage");
 
         // Send the message with the cat name
         new Thread(new Runnable() {

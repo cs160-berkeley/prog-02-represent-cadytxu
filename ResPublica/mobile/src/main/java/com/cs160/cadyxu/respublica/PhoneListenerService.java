@@ -17,8 +17,8 @@ import java.nio.charset.StandardCharsets;
 public class PhoneListenerService extends WearableListenerService {
     //   WearableListenerServices don't need an iBinder or an onStartCommand: they just need an onMessageReceieved.
     private static final String NAME = "/send_name";
-   // private static final String IMAGE = "/send_image";
-    private String repName, repImage;
+    private static final String ZIPSTRING = "/zipString";
+    private String repName, zipString;
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
@@ -28,11 +28,12 @@ public class PhoneListenerService extends WearableListenerService {
             repName = new String(messageEvent.getData(), StandardCharsets.UTF_8);
 
             // Make a toast with the String
-            Context context = getApplicationContext();
+            /*Context context = getApplicationContext();
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, repName, duration);
             toast.show();
+            */
 
             Intent detail = new Intent(getApplicationContext(), DetailActivity.class);
             Bundle extras = new Bundle();

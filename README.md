@@ -1,6 +1,6 @@
 # PROG 02: Represent!
 
-Briefly describe your app here.
+This is an android application that helps voters know their representatives and senators. This app searches for relevant information based on users' zipcode or current location and interacts with users through both smart phone and smart watch. The shake feature generates randomized zipcode/location and updates the information accordingly. 
 
 ## Authors
 
@@ -12,7 +12,23 @@ See [your demo video title here] (https://link_to_your_video)
 
 ## Screenshots
 
-<img src="screenshots/main.png" height="400" alt="Screenshot"/>
+Main View on Phone: 
+<img src="screenshots/PhoneMainView.png" height="400" alt="Screenshot"/>
+
+Congressional View on Phone:
+<img src="screenshots/PhoneSumView.png" height="400" alt="Screenshot"/>
+
+Detail View on Phone: 
+<img src="screenshots/PhoneDetailView.png" height="400" alt="Screenshot"/>
+
+Main View on Watch: 
+<img src="screenshots/WatchMainView.png" height="400" alt="Screenshot"/>
+
+Rep View on Watch: 
+<img src="screenshots/PhoneRepView.png" height="400" alt="Screenshot"/>
+
+Vote View on Watch: 
+<img src="screenshots/PhoneVoteView.png" height="400" alt="Screenshot"/>
 
 ## Acknowledgments
 
