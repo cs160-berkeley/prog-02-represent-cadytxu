@@ -8,7 +8,7 @@ Cady Xu ([cxu@berkeley.edu](mailto:cxu@berkeley.edu))
 
 ## Demo Video
 
-See [your demo video title here] (https://link_to_your_video)
+See [Res Publica Video Demo] (https://youtu.be/jmfvH4a_HRg)
 
 ## Screenshots
 
@@ -32,8 +32,8 @@ Vote View on Watch:
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
+* Hat tip to anyone who's code was used  
 http://stackoverflow.com/questions/2317428/android-i-want-to-shake-it  
 http://developer.android.com/guide/topics/sensors/sensors_overview.html  
-* Any other support
-Many Thanks to Section TA: Jasper O'Leary 
+* Any other support  
+Many Thanks to Section TA: Jasper O'Leary and Jingyi Li    
