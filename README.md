@@ -33,4 +33,7 @@ Vote View on Watch:
 ## Acknowledgments
 
 * Hat tip to anyone who's code was used
+http://stackoverflow.com/questions/2317428/android-i-want-to-shake-it  
+http://developer.android.com/guide/topics/sensors/sensors_overview.html  
 * Any other support
+Many Thanks to Section TA: Jasper O'Leary 
