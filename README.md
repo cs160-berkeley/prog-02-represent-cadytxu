@@ -12,23 +12,23 @@ See [your demo video title here] (https://link_to_your_video)
 
 ## Screenshots
 
-Main View on Phone: 
+Main View on Phone:  
 <img src="screenshots/PhoneMainView.png" height="400" alt="Screenshot"/>
 
-Congressional View on Phone:
+Congressional View on Phone:  
 <img src="screenshots/PhoneSumView.png" height="400" alt="Screenshot"/>
 
-Detail View on Phone: 
+Detail View on Phone:  
 <img src="screenshots/PhoneDetailView.png" height="400" alt="Screenshot"/>
 
-Main View on Watch: 
+Main View on Watch:  
 <img src="screenshots/WatchMainView.png" height="400" alt="Screenshot"/>
 
-Rep View on Watch: 
-<img src="screenshots/PhoneRepView.png" height="400" alt="Screenshot"/>
+Rep View on Watch:  
+<img src="screenshots/WatchRepView.png" height="400" alt="Screenshot"/>
 
-Vote View on Watch: 
-<img src="screenshots/PhoneVoteView.png" height="400" alt="Screenshot"/>
+Vote View on Watch:  
+<img src="screenshots/WatchVoteView.png" height="400" alt="Screenshot"/>
 
 ## Acknowledgments
 
