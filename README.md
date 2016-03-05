@@ -22,13 +22,13 @@ Detail View on Phone:
 <img src="screenshots/PhoneDetailView.png" height="400" alt="Screenshot"/>
 
 Main View on Watch:  
-<img src="screenshots/WatchMainView.png" height="400" alt="Screenshot"/>
+<img src="screenshots/WatchMainView.png" height="200" alt="Screenshot"/>
 
 Rep View on Watch:  
-<img src="screenshots/WatchRepView.png" height="400" alt="Screenshot"/>
+<img src="screenshots/WatchRepView.png" height="200" alt="Screenshot"/>
 
 Vote View on Watch:  
-<img src="screenshots/WatchVoteView.png" height="400" alt="Screenshot"/>
+<img src="screenshots/WatchVoteView.png" height="200" alt="Screenshot"/>
 
 ## Acknowledgments
 
