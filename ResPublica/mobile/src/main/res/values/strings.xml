@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">ResPublica</string>
     <string name="action_settings">Settings</string>
-    <string name="welcome">Welcome!</string>
+    <string name="welcome">Welcome to Res Publica!</string>
     <string name="curLocButtonStr">Or Use Current Location</string>
     <string name="zipHintStr">Enter your ZIP code</string>
     <string name="doneStr">Done!</string>
     <string name="orStr">Or</string>
     <string name="title_activity_summary">SummaryActivity</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="SUN_API_KEY">c662476b364441d1bc94e80bda802325</string>
+    <string name="SUN_LOCATE_API_URL">http://congress.api.sunlightfoundation.com/legislators/locate?</string>
+    <string name="google_app_id">595189897728</string>
 </resources>

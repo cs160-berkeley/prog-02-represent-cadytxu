@@ -3,6 +3,9 @@
     package="com.cs160.cadyxu.respublica">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -44,6 +47,13 @@
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDNgQeqDI9O4SvFHYrQI6WJRJS-7uISOi8"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b7a261e1b14e398974e82cbf99bfe808f7f77265" />
     </application>
 
 </manifest>

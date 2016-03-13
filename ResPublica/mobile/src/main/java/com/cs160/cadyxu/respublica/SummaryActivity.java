@@ -3,16 +3,25 @@ package com.cs160.cadyxu.respublica;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,91 +29,123 @@ public class SummaryActivity extends AppCompatActivity {
     private ListView lvRep;
     private RepSumAdapter adapter;
     protected static ArrayList<RepSum> mRepList;
-    private String zipString;
+    private String urlString;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
-        zipString = getIntent().getStringExtra("zipCode");
-        mRepList = new ArrayList<RepSum>();
-        if (zipString!=null && zipString.equals("94704")){
-            mRepList.add(new RepSum(1,
-                    R.drawable.dianne_feinstein,
-                    "Sen. Dianne Feinstein",
-                    "senator@feinstein.senate.gov",
-                    "Vote for Dianne Feinstein!!!",
-                    "Democrat", "Senator",
-                    "http://www.feinstein.senate.gov"));
-            mRepList.add(new RepSum(2,
-                    R.drawable.barbara_lee,
-                    "Rep. Barbara Lee",
-                    "barbaralee@gmail.com",
-                    "Vote for Barbara Lee!!!",
-                    "Democrat",
-                    "Representative",
-                    "http://www.barbaralee.com"));
-            mRepList.add(new RepSum(3,
-                    R.drawable.barbara_boxer,
-                    "Sen. Barbara Boxer",
-                    "barbaraboxer@gmail.com",
-                    "Vote For Barbara Boxer!!!",
-                    "Democrat",
-                    "Senator",
-                    "http://www.boxer.senate.gov"));
-        } else {
-            mRepList.add(new RepSum(1,
-                    R.drawable.barbara_boxer,
-                    "Sen. Barbara Boxer",
-                    "barbaraboxer@gmail.com",
-                    "Vote For Barbara Boxer!!!",
-                    "Democrat",
-                    "Senator",
-                    "http://www.boxer.senate.gov"));
-            mRepList.add(new RepSum(2,
-                    R.drawable.dianne_feinstein,
-                    "Sen. Dianne Feinstein",
-                    "senator@feinstein.senate.gov",
-                    "Vote for Dianne Feinstein!!!",
-                    "Democrat", "Senator",
-                    "http://www.feinstein.senate.gov"));
-            mRepList.add(new RepSum(3,
-                    R.drawable.barbara_lee,
-                    "Rep. Barbara Lee",
-                    "barbaralee@gmail.com",
-                    "Vote for Barbara Lee!!!",
-                    "Democrat",
-                    "Representative",
-                    "http://www.barbaralee.com"));
+        urlString = getIntent().getStringExtra("url");
+
+        if (urlString != null) {
+            FetchRepTask repTask = new FetchRepTask();
+            try{
+                repTask.execute(urlString);
+                if (mRepList == null){
+                    Log.d("SummaryActivity" , "mRepList is NULL!!!");
+                } else {
+                    Log.d("SummaryActivity", "mRepList: " + mRepList.toString());
+                }
+            } catch (Exception e){
+                Log.e("SummaryActivity", "Exception thrown : " + e.toString());
+            }
         }
 
-
-        /*Toast.makeText(this, zipCode, Toast.LENGTH_LONG).show();
-        Notification notification = new Notification.Builder(this)
-                .setContentTitle(zipCode)
-                .build();
-        int mNotificationId = 001;
-        // Gets an instance of the NotificationManager service
-        NotificationManager mNotifyMgr =
-                (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        // Builds the notification and issues it.
-        mNotifyMgr.notify(mNotificationId, notification); */
         lvRep = (ListView) findViewById(R.id.listview_reps);
 
-        adapter = new RepSumAdapter(getApplicationContext(), mRepList);
-        lvRep.setAdapter(adapter);
+
 
         lvRep.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent detail = new Intent(getApplicationContext(), DetailActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("repName", mRepList.get(position).getName());
-                extras.putString("repImage", String.valueOf(mRepList.get(position).getImage()));
+                extras.putString("repImage", mRepList.get(position).getImage());
+                extras.putString("repParty", mRepList.get(position).getParty());
+                extras.putString("repId", mRepList.get(position).getId());
+                extras.putString("repEndTerm", mRepList.get(position).getEndTerm());
                 detail.putExtras(extras);
                 startActivity(detail);
             }
         });
     }
 
+    private class FetchRepTask extends AsyncTask<String, Void, ArrayList<RepSum>> {
+
+        @Override
+        protected void onPostExecute(ArrayList<RepSum> repSums) {
+            mRepList = repSums;
+            adapter = new RepSumAdapter(getApplicationContext(), mRepList);
+            lvRep.setAdapter(adapter);
+        }
+
+        @Override
+        protected ArrayList<RepSum> doInBackground(String... params) {
+            HttpURLConnection urlConnection = null;
+            BufferedReader reader = null;
+            String repJsonString = null;
+
+            try {
+                URL url = new URL(params[0]);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setReadTimeout(10000 /* milliseconds */);
+                urlConnection.setConnectTimeout(15000 /* milliseconds */);
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setDoInput(true);
+                urlConnection.connect();
+
+                InputStream inputStream = urlConnection.getInputStream();
+                StringBuffer buffer = new StringBuffer();
+                if (inputStream == null) {
+                    //Nothing to do
+                    return null;
+                }
+                reader = new BufferedReader(new InputStreamReader((inputStream)));
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line + "\n");
+                    //Log.d("SummaryActivity", "Json Line: " + line);
+                }
+
+                if (buffer.length() == 0) {
+                    //stream is empty
+                    return null;
+                } else {
+                    repJsonString = buffer.toString();
+                    Log.v("FetchRepTask", "Json Line: " + repJsonString);
+                    ArrayList<RepSum> repList = new RepDataParser().getRepList(repJsonString);
+                    if (repList == null){
+                        Log.d("FetchRepTask", "REPLIST IS NULL!!!!!");
+                    }
+                    Log.d("FetchRepTask", "Rep List: " + repList.toString());
+                    return repList;
+                }
+
+            } catch (IOException e) {
+                Log.e("FetchRepTask", "Error", e);
+                return null;
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (final IOException e) {
+                        Log.e("FetchRepTask", "Error closing stream", e);
+                    }
+                }
+                //return null;
+            }
+        }
+    }
 }
+
+
+
+
