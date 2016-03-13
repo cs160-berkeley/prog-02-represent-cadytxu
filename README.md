@@ -8,7 +8,7 @@ Cady Xu ([cxu@berkeley.edu](mailto:cxu@berkeley.edu))
 
 ## Demo Video
 
-See [Res Publica Video Demo] (https://youtu.be/jmfvH4a_HRg)
+See [Res Publica Video Demo] (https://youtu.be/Jq7DJX4hX_8)
 
 ## Screenshots
 
